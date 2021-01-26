@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eloancn.bt.dao.TenderBusDetailMapper">
+	<sql id="baseColumnList">
+			u.id as id ,
+			u.tid as tid ,
+			u.lazy_cat_status as lazyCatStatus ,
+			u.tender_full_time as tenderFullTime ,
+			u.lazy_status_change_time as lazyStatusChangeTime ,
+			u.account_number as accountNumber ,
+			u.account_type as accountType ,
+			u.premium_fee as premiumFee ,
+			u.premium_spouse_fee as premiumSpouseFee ,
+			u.premium_coborrower_fee as premiumCoborrowerFee ,
+			u.premium_coborrower_count as premiumCoborrowerCount ,
+			u.guarantee_agent_fee as guaranteeAgentFee ,
+			u.guarantee_fee as guaranteeFee ,
+			u.credit_reference_fee as creditReferenceFee ,
+			u.risk_margin_fee as riskMarginFee ,
+			u.premium_cplus_fee as premiumCplusFee ,
+			u.savings_cplus_fee as savingsCplusFee ,
+			u.avg_income as avgIncome ,
+			u.family_assets as familyAssets ,
+			u.loan_usage as loanUsage ,
+			u.rayment_source as raymentSource ,
+			u.is_stock as isStock ,
+			u.version as version ,
+			u.service_fee as serviceFee ,
+			u.offline_service_fee as offlineServiceFee ,
+			u.more_tender_diplay_info as moreTenderDiplayInfo ,
+			u.more_tender_type as moreTenderType ,
+			u.create_time as createTime ,
+			u.update_time as updateTime ,
+			u.loan_source as loanSource ,
+			u.once_repayment_sign as onceRepaymentSign ,
+			u.is_repay_old as isRepayOld ,
+			u.conversion_type as conversionType ,
+			u.remark as remark ,
+			u.agent_serilanumber as agentSerilanumber ,
+			u.agent_type as agentType ,
+			u.chargeoff_type as chargeoffType ,
+			u.principal_compress_rate as principalCompressRate ,
+			u.interest_rate_display as interestRateDisplay ,
+			u.irr_rate as irrRate ,
+			u.confirm_type as confirmType ,
+			u.confirm_check_time as confirmCheckTime ,
+			u.confirm_check_status as confirmCheckStatus ,
+			u.extra_service_fee as extraServiceFee ,
+			u.confirm_check_position as confirmCheckPosition ,
+			u.enterprise_verification_status as enterpriseVerificationStatus 
+	</sql>
+	<sql id="searchCriteria">
+		<if test="id != null">
+			and u.id = #{id,jdbcType=NUMERIC}
+		</if>
+		<if test="tid != null">
+			and u.tid = #{tid,jdbcType=NUMERIC}
+		</if>
+		<if test="lazyCatStatus != null">
+			and u.lazy_cat_status = #{lazyCatStatus,jdbcType=NUMERIC}
+		</if>
+		<if test="tenderFullTime != null">
+			and u.tender_full_time = #{tenderFullTime,jdbcType=NUMERIC}
+		</if>
+		<if test="lazyStatusChangeTime != null">
+			and u.lazy_status_change_time = #{lazyStatusChangeTime,jdbcType=NUMERIC}
+		</if>
+		<if test="accountNumber != null">
+			and u.account_number = #{accountNumber,jdbcType=VARCHAR}
+		</if>
+		<if test="accountNumberLike != null">
+			and u.account_number like CONCAT('%',#{accountNumberLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="accountType != null">
+			and u.account_type = #{accountType,jdbcType=VARCHAR}
+		</if>
+		<if test="accountTypeLike != null">
+			and u.account_type like CONCAT('%',#{accountTypeLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="premiumFee != null">
+			and u.premium_fee = #{premiumFee,jdbcType=DECIMAL}
+		</if>
+		<if test="premiumSpouseFee != null">
+			and u.premium_spouse_fee = #{premiumSpouseFee,jdbcType=DECIMAL}
+		</if>
+		<if test="premiumCoborrowerFee != null">
+			and u.premium_coborrower_fee = #{premiumCoborrowerFee,jdbcType=DECIMAL}
+		</if>
+		<if test="premiumCoborrowerCount != null">
+			and u.premium_coborrower_count = #{premiumCoborrowerCount,jdbcType=NUMERIC}
+		</if>
+		<if test="guaranteeAgentFee != null">
+			and u.guarantee_agent_fee = #{guaranteeAgentFee,jdbcType=DECIMAL}
+		</if>
+		<if test="guaranteeFee != null">
+			and u.guarantee_fee = #{guaranteeFee,jdbcType=DECIMAL}
+		</if>
+		<if test="creditReferenceFee != null">
+			and u.credit_reference_fee = #{creditReferenceFee,jdbcType=DECIMAL}
+		</if>
+		<if test="riskMarginFee != null">
+			and u.risk_margin_fee = #{riskMarginFee,jdbcType=DECIMAL}
+		</if>
+		<if test="premiumCplusFee != null">
+			and u.premium_cplus_fee = #{premiumCplusFee,jdbcType=DECIMAL}
+		</if>
+		<if test="savingsCplusFee != null">
+			and u.savings_cplus_fee = #{savingsCplusFee,jdbcType=DECIMAL}
+		</if>
+		<if test="avgIncome != null">
+			and u.avg_income = #{avgIncome,jdbcType=DECIMAL}
+		</if>
+		<if test="familyAssets != null">
+			and u.family_assets = #{familyAssets,jdbcType=VARCHAR}
+		</if>
+		<if test="familyAssetsLike != null">
+			and u.family_assets like CONCAT('%',#{familyAssetsLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="loanUsage != null">
+			and u.loan_usage = #{loanUsage,jdbcType=VARCHAR}
+		</if>
+		<if test="loanUsageLike != null">
+			and u.loan_usage like CONCAT('%',#{loanUsageLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="raymentSource != null">
+			and u.rayment_source = #{raymentSource,jdbcType=VARCHAR}
+		</if>
+		<if test="raymentSourceLike != null">
+			and u.rayment_source like CONCAT('%',#{raymentSourceLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="isStock != null">
+			and u.is_stock = #{isStock,jdbcType=NUMERIC}
+		</if>
+		<if test="version != null">
+			and u.version = #{version,jdbcType=NUMERIC}
+		</if>
+		<if test="serviceFee != null">
+			and u.service_fee = #{serviceFee,jdbcType=DECIMAL}
+		</if>
+		<if test="offlineServiceFee != null">
+			and u.offline_service_fee = #{offlineServiceFee,jdbcType=DECIMAL}
+		</if>
+		<if test="moreTenderDiplayInfo != null">
+			and u.more_tender_diplay_info = #{moreTenderDiplayInfo,jdbcType=NUMERIC}
+		</if>
+		<if test="moreTenderType != null">
+			and u.more_tender_type = #{moreTenderType,jdbcType=NUMERIC}
+		</if>
+		<if test="createTime != null">
+			and u.create_time = #{createTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="updateTime != null">
+			and u.update_time = #{updateTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="loanSource != null">
+			and u.loan_source = #{loanSource,jdbcType=NUMERIC}
+		</if>
+		<if test="onceRepaymentSign != null">
+			and u.once_repayment_sign = #{onceRepaymentSign,jdbcType=NUMERIC}
+		</if>
+		<if test="isRepayOld != null">
+			and u.is_repay_old = #{isRepayOld,jdbcType=NUMERIC}
+		</if>
+		<if test="conversionType != null">
+			and u.conversion_type = #{conversionType,jdbcType=NUMERIC}
+		</if>
+		<if test="remark != null">
+			and u.remark = #{remark,jdbcType=VARCHAR}
+		</if>
+		<if test="remarkLike != null">
+			and u.remark like CONCAT('%',#{remarkLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="agentSerilanumber != null">
+			and u.agent_serilanumber = #{agentSerilanumber,jdbcType=VARCHAR}
+		</if>
+		<if test="agentSerilanumberLike != null">
+			and u.agent_serilanumber like CONCAT('%',#{agentSerilanumberLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="agentType != null">
+			and u.agent_type = #{agentType,jdbcType=NUMERIC}
+		</if>
+		<if test="chargeoffType != null">
+			and u.chargeoff_type = #{chargeoffType,jdbcType=NUMERIC}
+		</if>
+		<if test="principalCompressRate != null">
+			and u.principal_compress_rate = #{principalCompressRate,jdbcType=DECIMAL}
+		</if>
+		<if test="interestRateDisplay != null">
+			and u.interest_rate_display = #{interestRateDisplay,jdbcType=DECIMAL}
+		</if>
+		<if test="irrRate != null">
+			and u.irr_rate = #{irrRate,jdbcType=DECIMAL}
+		</if>
+		<if test="confirmType != null">
+			and u.confirm_type = #{confirmType,jdbcType=NUMERIC}
+		</if>
+		<if test="confirmCheckTime != null">
+			and u.confirm_check_time = #{confirmCheckTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="confirmCheckStatus != null">
+			and u.confirm_check_status = #{confirmCheckStatus,jdbcType=NUMERIC}
+		</if>
+		<if test="extraServiceFee != null">
+			and u.extra_service_fee = #{extraServiceFee,jdbcType=DECIMAL}
+		</if>
+		<if test="confirmCheckPosition != null">
+			and u.confirm_check_position = #{confirmCheckPosition,jdbcType=NUMERIC}
+		</if>
+		<if test="enterpriseVerificationStatus != null">
+			and u.enterprise_verification_status = #{enterpriseVerificationStatus,jdbcType=VARCHAR}
+		</if>
+		<if test="enterpriseVerificationStatusLike != null">
+			and u.enterprise_verification_status like CONCAT('%',#{enterpriseVerificationStatusLike,jdbcType=VARCHAR},'%') 
+		</if>
+	</sql>
+
+	<!-- 查询列表数据 -->
+	<select id="queryListResult" parameterType="java.util.Map" resultType="com.eloancn.bt.entity.TenderBusDetail">
+		select
+			<include refid="baseColumnList" />
+		from
+			d_tender_bus_detail u
+		where
+			1=1
+			<include refid="searchCriteria" />
+			<if test="orderBy != null">
+                 order by ${orderBy}
+            </if>
+			<if test="pageNo != null and pageSize != null">
+            	limit ${(pageNo - 1) * pageSize}, ${pageSize}
+            </if>
+	</select>
+	<!-- 查询列表数据数量 -->
+	<select id="queryListResultCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select
+			count(u.id)
+		from
+			d_tender_bus_detail u
+		where
+			1=1
+		<include refid="searchCriteria" />
+	</select>
+	<!-- 自定义where条件查询列表 -->
+	<select id="queryListResultByWhere" parameterType="java.util.Map" statementType="STATEMENT" resultType="com.eloancn.bt.entity.TenderBusDetail">
+		select
+			<include refid="baseColumnList" />
+		from
+			d_tender_bus_detail u
+		where
+		    ${whereSqlStr}
+			<if test="orderBy != null">
+                 order by ${orderBy}
+            </if>
+            <if test="pageNo != null and pageSize != null">
+                limit ${(pageNo - 1) * pageSize}, ${pageSize}
+            </if>
+	</select>
+	<!-- 自定义where条件查询列表数量 -->
+	<select id="queryListResultCountByWhere" parameterType="java.util.Map" statementType="STATEMENT" resultType="java.lang.Integer">
+		select
+			count(u.id)
+		from
+			d_tender_bus_detail u
+		where
+		    ${whereSqlStr}
+
+	</select>
+	
+	<!-- 查询一条数据 -->
+	<select id="querySingleResultById" parameterType="java.lang.Integer" resultType="com.eloancn.bt.entity.TenderBusDetail">
+		select
+			<include refid="baseColumnList" />
+		from
+			d_tender_bus_detail u
+		where
+			1=1
+			and u.ID = #{id,jdbcType=NUMERIC}
+	</select>
+
+   <!-- 保存 -->
+	<insert id="save" parameterType="com.eloancn.bt.entity.TenderBusDetail" useGeneratedKeys="true" keyProperty="id">
+		insert into d_tender_bus_detail(
+			tid,
+			lazy_cat_status,
+			tender_full_time,
+			lazy_status_change_time,
+			account_number,
+			account_type,
+			premium_fee,
+			premium_spouse_fee,
+			premium_coborrower_fee,
+			premium_coborrower_count,
+			guarantee_agent_fee,
+			guarantee_fee,
+			credit_reference_fee,
+			risk_margin_fee,
+			premium_cplus_fee,
+			savings_cplus_fee,
+			avg_income,
+			family_assets,
+			loan_usage,
+			rayment_source,
+			is_stock,
+			version,
+			service_fee,
+			offline_service_fee,
+			more_tender_diplay_info,
+			more_tender_type,
+			create_time,
+			update_time,
+			loan_source,
+			once_repayment_sign,
+			is_repay_old,
+			conversion_type,
+			remark,
+			agent_serilanumber,
+			agent_type,
+			chargeoff_type,
+			principal_compress_rate,
+			interest_rate_display,
+			irr_rate,
+			confirm_type,
+			confirm_check_time,
+			confirm_check_status,
+			extra_service_fee,
+			confirm_check_position,
+			enterprise_verification_status
+		)values(
+			#{tid,jdbcType=NUMERIC},
+			#{lazyCatStatus,jdbcType=NUMERIC},
+			#{tenderFullTime,jdbcType=NUMERIC},
+			#{lazyStatusChangeTime,jdbcType=NUMERIC},
+			#{accountNumber,jdbcType=VARCHAR},
+			#{accountType,jdbcType=VARCHAR},
+			#{premiumFee,jdbcType=DECIMAL},
+			#{premiumSpouseFee,jdbcType=DECIMAL},
+			#{premiumCoborrowerFee,jdbcType=DECIMAL},
+			#{premiumCoborrowerCount,jdbcType=NUMERIC},
+			#{guaranteeAgentFee,jdbcType=DECIMAL},
+			#{guaranteeFee,jdbcType=DECIMAL},
+			#{creditReferenceFee,jdbcType=DECIMAL},
+			#{riskMarginFee,jdbcType=DECIMAL},
+			#{premiumCplusFee,jdbcType=DECIMAL},
+			#{savingsCplusFee,jdbcType=DECIMAL},
+			#{avgIncome,jdbcType=DECIMAL},
+			#{familyAssets,jdbcType=VARCHAR},
+			#{loanUsage,jdbcType=VARCHAR},
+			#{raymentSource,jdbcType=VARCHAR},
+			#{isStock,jdbcType=NUMERIC},
+			#{version,jdbcType=NUMERIC},
+			#{serviceFee,jdbcType=DECIMAL},
+			#{offlineServiceFee,jdbcType=DECIMAL},
+			#{moreTenderDiplayInfo,jdbcType=NUMERIC},
+			#{moreTenderType,jdbcType=NUMERIC},
+			#{createTime,jdbcType=TIMESTAMP},
+			#{updateTime,jdbcType=TIMESTAMP},
+			#{loanSource,jdbcType=NUMERIC},
+			#{onceRepaymentSign,jdbcType=NUMERIC},
+			#{isRepayOld,jdbcType=NUMERIC},
+			#{conversionType,jdbcType=NUMERIC},
+			#{remark,jdbcType=VARCHAR},
+			#{agentSerilanumber,jdbcType=VARCHAR},
+			#{agentType,jdbcType=NUMERIC},
+			#{chargeoffType,jdbcType=NUMERIC},
+			#{principalCompressRate,jdbcType=DECIMAL},
+			#{interestRateDisplay,jdbcType=DECIMAL},
+			#{irrRate,jdbcType=DECIMAL},
+			#{confirmType,jdbcType=NUMERIC},
+			#{confirmCheckTime,jdbcType=TIMESTAMP},
+			#{confirmCheckStatus,jdbcType=NUMERIC},
+			#{extraServiceFee,jdbcType=DECIMAL},
+			#{confirmCheckPosition,jdbcType=NUMERIC},
+			#{enterpriseVerificationStatus,jdbcType=VARCHAR}
+		)
+	</insert>
+	<!-- 批量保存 -->
+	<insert id="saveBatch" parameterType="ArrayList">
+		insert into d_tender_bus_detail(
+			tid,
+			lazy_cat_status,
+			tender_full_time,
+			lazy_status_change_time,
+			account_number,
+			account_type,
+			premium_fee,
+			premium_spouse_fee,
+			premium_coborrower_fee,
+			premium_coborrower_count,
+			guarantee_agent_fee,
+			guarantee_fee,
+			credit_reference_fee,
+			risk_margin_fee,
+			premium_cplus_fee,
+			savings_cplus_fee,
+			avg_income,
+			family_assets,
+			loan_usage,
+			rayment_source,
+			is_stock,
+			version,
+			service_fee,
+			offline_service_fee,
+			more_tender_diplay_info,
+			more_tender_type,
+			create_time,
+			update_time,
+			loan_source,
+			once_repayment_sign,
+			is_repay_old,
+			conversion_type,
+			remark,
+			agent_serilanumber,
+			agent_type,
+			chargeoff_type,
+			principal_compress_rate,
+			interest_rate_display,
+			irr_rate,
+			confirm_type,
+			confirm_check_time,
+			confirm_check_status,
+			extra_service_fee,
+			confirm_check_position,
+			enterprise_verification_status
+		)values
+		<foreach collection="list" item="obj" separator=",">
+		(
+			#{obj.tid,jdbcType=NUMERIC},
+			#{obj.lazyCatStatus,jdbcType=NUMERIC},
+			#{obj.tenderFullTime,jdbcType=NUMERIC},
+			#{obj.lazyStatusChangeTime,jdbcType=NUMERIC},
+			#{obj.accountNumber,jdbcType=VARCHAR},
+			#{obj.accountType,jdbcType=VARCHAR},
+			#{obj.premiumFee,jdbcType=DECIMAL},
+			#{obj.premiumSpouseFee,jdbcType=DECIMAL},
+			#{obj.premiumCoborrowerFee,jdbcType=DECIMAL},
+			#{obj.premiumCoborrowerCount,jdbcType=NUMERIC},
+			#{obj.guaranteeAgentFee,jdbcType=DECIMAL},
+			#{obj.guaranteeFee,jdbcType=DECIMAL},
+			#{obj.creditReferenceFee,jdbcType=DECIMAL},
+			#{obj.riskMarginFee,jdbcType=DECIMAL},
+			#{obj.premiumCplusFee,jdbcType=DECIMAL},
+			#{obj.savingsCplusFee,jdbcType=DECIMAL},
+			#{obj.avgIncome,jdbcType=DECIMAL},
+			#{obj.familyAssets,jdbcType=VARCHAR},
+			#{obj.loanUsage,jdbcType=VARCHAR},
+			#{obj.raymentSource,jdbcType=VARCHAR},
+			#{obj.isStock,jdbcType=NUMERIC},
+			#{obj.version,jdbcType=NUMERIC},
+			#{obj.serviceFee,jdbcType=DECIMAL},
+			#{obj.offlineServiceFee,jdbcType=DECIMAL},
+			#{obj.moreTenderDiplayInfo,jdbcType=NUMERIC},
+			#{obj.moreTenderType,jdbcType=NUMERIC},
+			#{obj.createTime,jdbcType=TIMESTAMP},
+			#{obj.updateTime,jdbcType=TIMESTAMP},
+			#{obj.loanSource,jdbcType=NUMERIC},
+			#{obj.onceRepaymentSign,jdbcType=NUMERIC},
+			#{obj.isRepayOld,jdbcType=NUMERIC},
+			#{obj.conversionType,jdbcType=NUMERIC},
+			#{obj.remark,jdbcType=VARCHAR},
+			#{obj.agentSerilanumber,jdbcType=VARCHAR},
+			#{obj.agentType,jdbcType=NUMERIC},
+			#{obj.chargeoffType,jdbcType=NUMERIC},
+			#{obj.principalCompressRate,jdbcType=DECIMAL},
+			#{obj.interestRateDisplay,jdbcType=DECIMAL},
+			#{obj.irrRate,jdbcType=DECIMAL},
+			#{obj.confirmType,jdbcType=NUMERIC},
+			#{obj.confirmCheckTime,jdbcType=TIMESTAMP},
+			#{obj.confirmCheckStatus,jdbcType=NUMERIC},
+			#{obj.extraServiceFee,jdbcType=DECIMAL},
+			#{obj.confirmCheckPosition,jdbcType=NUMERIC},
+			#{obj.enterpriseVerificationStatus,jdbcType=VARCHAR}
+		)
+		</foreach>
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.eloancn.bt.entity.TenderBusDetail">
+		update d_tender_bus_detail u
+		<set>
+			u.id = u.id 
+			<if test="tid != null">
+				,u.tid=#{tid,jdbcType=NUMERIC} 
+			</if>
+			<if test="lazyCatStatus != null">
+				,u.lazy_cat_status=#{lazyCatStatus,jdbcType=NUMERIC} 
+			</if>
+			<if test="tenderFullTime != null">
+				,u.tender_full_time=#{tenderFullTime,jdbcType=NUMERIC} 
+			</if>
+			<if test="lazyStatusChangeTime != null">
+				,u.lazy_status_change_time=#{lazyStatusChangeTime,jdbcType=NUMERIC} 
+			</if>
+			<if test="accountNumber != null">
+				,u.account_number=#{accountNumber,jdbcType=VARCHAR} 
+			</if>
+			<if test="accountType != null">
+				,u.account_type=#{accountType,jdbcType=VARCHAR} 
+			</if>
+			<if test="premiumFee != null">
+				,u.premium_fee=#{premiumFee,jdbcType=DECIMAL} 
+			</if>
+			<if test="premiumSpouseFee != null">
+				,u.premium_spouse_fee=#{premiumSpouseFee,jdbcType=DECIMAL} 
+			</if>
+			<if test="premiumCoborrowerFee != null">
+				,u.premium_coborrower_fee=#{premiumCoborrowerFee,jdbcType=DECIMAL} 
+			</if>
+			<if test="premiumCoborrowerCount != null">
+				,u.premium_coborrower_count=#{premiumCoborrowerCount,jdbcType=NUMERIC} 
+			</if>
+			<if test="guaranteeAgentFee != null">
+				,u.guarantee_agent_fee=#{guaranteeAgentFee,jdbcType=DECIMAL} 
+			</if>
+			<if test="guaranteeFee != null">
+				,u.guarantee_fee=#{guaranteeFee,jdbcType=DECIMAL} 
+			</if>
+			<if test="creditReferenceFee != null">
+				,u.credit_reference_fee=#{creditReferenceFee,jdbcType=DECIMAL} 
+			</if>
+			<if test="riskMarginFee != null">
+				,u.risk_margin_fee=#{riskMarginFee,jdbcType=DECIMAL} 
+			</if>
+			<if test="premiumCplusFee != null">
+				,u.premium_cplus_fee=#{premiumCplusFee,jdbcType=DECIMAL} 
+			</if>
+			<if test="savingsCplusFee != null">
+				,u.savings_cplus_fee=#{savingsCplusFee,jdbcType=DECIMAL} 
+			</if>
+			<if test="avgIncome != null">
+				,u.avg_income=#{avgIncome,jdbcType=DECIMAL} 
+			</if>
+			<if test="familyAssets != null">
+				,u.family_assets=#{familyAssets,jdbcType=VARCHAR} 
+			</if>
+			<if test="loanUsage != null">
+				,u.loan_usage=#{loanUsage,jdbcType=VARCHAR} 
+			</if>
+			<if test="raymentSource != null">
+				,u.rayment_source=#{raymentSource,jdbcType=VARCHAR} 
+			</if>
+			<if test="isStock != null">
+				,u.is_stock=#{isStock,jdbcType=NUMERIC} 
+			</if>
+			<if test="version != null">
+				,u.version=#{version,jdbcType=NUMERIC} 
+			</if>
+			<if test="serviceFee != null">
+				,u.service_fee=#{serviceFee,jdbcType=DECIMAL} 
+			</if>
+			<if test="offlineServiceFee != null">
+				,u.offline_service_fee=#{offlineServiceFee,jdbcType=DECIMAL} 
+			</if>
+			<if test="moreTenderDiplayInfo != null">
+				,u.more_tender_diplay_info=#{moreTenderDiplayInfo,jdbcType=NUMERIC} 
+			</if>
+			<if test="moreTenderType != null">
+				,u.more_tender_type=#{moreTenderType,jdbcType=NUMERIC} 
+			</if>
+			<if test="updateTime != null">
+				,u.update_time=#{updateTime,jdbcType=TIMESTAMP} 
+			</if>
+			<if test="loanSource != null">
+				,u.loan_source=#{loanSource,jdbcType=NUMERIC} 
+			</if>
+			<if test="onceRepaymentSign != null">
+				,u.once_repayment_sign=#{onceRepaymentSign,jdbcType=NUMERIC} 
+			</if>
+			<if test="isRepayOld != null">
+				,u.is_repay_old=#{isRepayOld,jdbcType=NUMERIC} 
+			</if>
+			<if test="conversionType != null">
+				,u.conversion_type=#{conversionType,jdbcType=NUMERIC} 
+			</if>
+			<if test="remark != null">
+				,u.remark=#{remark,jdbcType=VARCHAR} 
+			</if>
+			<if test="agentSerilanumber != null">
+				,u.agent_serilanumber=#{agentSerilanumber,jdbcType=VARCHAR} 
+			</if>
+			<if test="agentType != null">
+				,u.agent_type=#{agentType,jdbcType=NUMERIC} 
+			</if>
+			<if test="chargeoffType != null">
+				,u.chargeoff_type=#{chargeoffType,jdbcType=NUMERIC} 
+			</if>
+			<if test="principalCompressRate != null">
+				,u.principal_compress_rate=#{principalCompressRate,jdbcType=DECIMAL} 
+			</if>
+			<if test="interestRateDisplay != null">
+				,u.interest_rate_display=#{interestRateDisplay,jdbcType=DECIMAL} 
+			</if>
+			<if test="irrRate != null">
+				,u.irr_rate=#{irrRate,jdbcType=DECIMAL} 
+			</if>
+			<if test="confirmType != null">
+				,u.confirm_type=#{confirmType,jdbcType=NUMERIC} 
+			</if>
+			<if test="confirmCheckTime != null">
+				,u.confirm_check_time=#{confirmCheckTime,jdbcType=TIMESTAMP} 
+			</if>
+			<if test="confirmCheckStatus != null">
+				,u.confirm_check_status=#{confirmCheckStatus,jdbcType=NUMERIC} 
+			</if>
+			<if test="extraServiceFee != null">
+				,u.extra_service_fee=#{extraServiceFee,jdbcType=DECIMAL} 
+			</if>
+			<if test="confirmCheckPosition != null">
+				,u.confirm_check_position=#{confirmCheckPosition,jdbcType=NUMERIC} 
+			</if>
+			<if test="enterpriseVerificationStatus != null">
+				,u.enterprise_verification_status=#{enterpriseVerificationStatus,jdbcType=VARCHAR} 
+			</if>
+		</set>
+		where
+            u.ID = #{id,jdbcType=NUMERIC}
+            
+	</update>
+
+	<!-- 物理删除 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from d_tender_bus_detail where id=#{id,jdbcType=INTEGER}
+	</delete>
+	
+	
+</mapper>

@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bt.dao.UserMapper">
+	<sql id="baseColumnList">
+			u.id as id ,
+			u.password as password ,
+			u.realname as realname ,
+			u.mobile as mobile ,
+			u.idcard as idcard ,
+			u.email as email ,
+			u.role as role ,
+			u.type as type ,
+			u.paypassword as paypassword ,
+			u.cdate as cdate ,
+			u.photo as photo ,
+			u.listphoto as listphoto ,
+			u.sessionid as sessionid ,
+			u.activecode as activecode ,
+			u.status as status ,
+			u.regiestType as regiesttype ,
+			u.encodePassworType as encodepasswortype ,
+			u.isThreeLead as isthreelead ,
+			u.singUser as singuser ,
+			u.encodeChar as encodechar ,
+			u.encodePayChar as encodepaychar ,
+			u.registflag as registflag ,
+			u.mapperuid as mapperuid 
+	</sql>
+	<sql id="searchCriteria">
+		<if test="id != null">
+			and u.id = #{id,jdbcType=NUMERIC}
+		</if>
+		<if test="password != null">
+			and u.password = #{password,jdbcType=VARCHAR}
+		</if>
+		<if test="passwordLike != null">
+			and u.password like CONCAT('%',#{passwordLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="realname != null">
+			and u.realname = #{realname,jdbcType=VARCHAR}
+		</if>
+		<if test="realnameLike != null">
+			and u.realname like CONCAT('%',#{realnameLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="mobile != null">
+			and u.mobile = #{mobile,jdbcType=VARCHAR}
+		</if>
+		<if test="mobileLike != null">
+			and u.mobile like CONCAT('%',#{mobileLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="idcard != null">
+			and u.idcard = #{idcard,jdbcType=VARCHAR}
+		</if>
+		<if test="idcardLike != null">
+			and u.idcard like CONCAT('%',#{idcardLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="email != null">
+			and u.email = #{email,jdbcType=VARCHAR}
+		</if>
+		<if test="emailLike != null">
+			and u.email like CONCAT('%',#{emailLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="role != null">
+			and u.role = #{role,jdbcType=NUMERIC}
+		</if>
+		<if test="type != null">
+			and u.type = #{type,jdbcType=DECIMAL}
+		</if>
+		<if test="paypassword != null">
+			and u.paypassword = #{paypassword,jdbcType=VARCHAR}
+		</if>
+		<if test="paypasswordLike != null">
+			and u.paypassword like CONCAT('%',#{paypasswordLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="cdate != null">
+			and u.cdate = #{cdate,jdbcType=DECIMAL}
+		</if>
+		<if test="photo != null">
+			and u.photo = #{photo,jdbcType=VARCHAR}
+		</if>
+		<if test="photoLike != null">
+			and u.photo like CONCAT('%',#{photoLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="listphoto != null">
+			and u.listphoto = #{listphoto,jdbcType=VARCHAR}
+		</if>
+		<if test="listphotoLike != null">
+			and u.listphoto like CONCAT('%',#{listphotoLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="sessionid != null">
+			and u.sessionid = #{sessionid,jdbcType=VARCHAR}
+		</if>
+		<if test="sessionidLike != null">
+			and u.sessionid like CONCAT('%',#{sessionidLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="activecode != null">
+			and u.activecode = #{activecode,jdbcType=VARCHAR}
+		</if>
+		<if test="activecodeLike != null">
+			and u.activecode like CONCAT('%',#{activecodeLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="status != null">
+			and u.status = #{status,jdbcType=NUMERIC}
+		</if>
+		<if test="regiesttype != null">
+			and u.regiestType = #{regiesttype,jdbcType=NUMERIC}
+		</if>
+		<if test="encodepasswortype != null">
+			and u.encodePassworType = #{encodepasswortype,jdbcType=NUMERIC}
+		</if>
+		<if test="isthreelead != null">
+			and u.isThreeLead = #{isthreelead,jdbcType=NUMERIC}
+		</if>
+		<if test="singuser != null">
+			and u.singUser = #{singuser,jdbcType=VARCHAR}
+		</if>
+		<if test="singuserLike != null">
+			and u.singUser like CONCAT('%',#{singuserLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="encodechar != null">
+			and u.encodeChar = #{encodechar,jdbcType=VARCHAR}
+		</if>
+		<if test="encodecharLike != null">
+			and u.encodeChar like CONCAT('%',#{encodecharLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="encodepaychar != null">
+			and u.encodePayChar = #{encodepaychar,jdbcType=VARCHAR}
+		</if>
+		<if test="encodepaycharLike != null">
+			and u.encodePayChar like CONCAT('%',#{encodepaycharLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="registflag != null">
+			and u.registflag = #{registflag,jdbcType=NUMERIC}
+		</if>
+		<if test="mapperuid != null">
+			and u.mapperuid = #{mapperuid,jdbcType=NUMERIC}
+		</if>
+	</sql>
+
+	<!-- 查询列表数据 -->
+	<select id="queryListResult" parameterType="java.util.Map" resultType="com.bt.entity.User">
+		select
+			<include refid="baseColumnList" />
+		from
+			d_user u
+		where
+			1=1
+			<include refid="searchCriteria" />
+			<if test="orderBy != null">
+                 order by ${orderBy}
+            </if>
+			<if test="pageNo != null and pageSize != null">
+            	limit ${(pageNo - 1) * pageSize}, ${pageSize}
+            </if>
+	</select>
+	<!-- 查询列表数据数量 -->
+	<select id="queryListResultCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select
+			count(u.id)
+		from
+			d_user u
+		where
+			1=1
+		<include refid="searchCriteria" />
+	</select>
+	<!-- 自定义where条件查询列表 -->
+	<select id="queryListResultByWhere" parameterType="java.util.Map" statementType="STATEMENT" resultType="com.bt.entity.User">
+		select
+			<include refid="baseColumnList" />
+		from
+			d_user u
+		where
+		    ${whereSqlStr}
+			<if test="orderBy != null">
+                 order by ${orderBy}
+            </if>
+            <if test="pageNo != null and pageSize != null">
+                limit ${(pageNo - 1) * pageSize}, ${pageSize}
+            </if>
+	</select>
+	<!-- 自定义where条件查询列表数量 -->
+	<select id="queryListResultCountByWhere" parameterType="java.util.Map" statementType="STATEMENT" resultType="java.lang.Integer">
+		select
+			count(u.id)
+		from
+			d_user u
+		where
+		    ${whereSqlStr}
+
+	</select>
+	
+	<!-- 查询一条数据 -->
+	<select id="querySingleResultById" parameterType="java.lang.Integer" resultType="com.bt.entity.User">
+		select
+			<include refid="baseColumnList" />
+		from
+			d_user u
+		where
+			1=1
+			and u.ID = #{id,jdbcType=NUMERIC}
+	</select>
+
+   <!-- 保存 -->
+	<insert id="save" parameterType="com.bt.entity.User" useGeneratedKeys="true" keyProperty="id">
+		insert into d_user(
+			password,
+			realname,
+			mobile,
+			idcard,
+			email,
+			role,
+			type,
+			paypassword,
+			cdate,
+			photo,
+			listphoto,
+			sessionid,
+			activecode,
+			status,
+			regiestType,
+			encodePassworType,
+			isThreeLead,
+			singUser,
+			encodeChar,
+			encodePayChar,
+			registflag,
+			mapperuid
+		)values(
+			#{password,jdbcType=VARCHAR},
+			#{realname,jdbcType=VARCHAR},
+			#{mobile,jdbcType=VARCHAR},
+			#{idcard,jdbcType=VARCHAR},
+			#{email,jdbcType=VARCHAR},
+			#{role,jdbcType=NUMERIC},
+			#{type,jdbcType=DECIMAL},
+			#{paypassword,jdbcType=VARCHAR},
+			#{cdate,jdbcType=DECIMAL},
+			#{photo,jdbcType=VARCHAR},
+			#{listphoto,jdbcType=VARCHAR},
+			#{sessionid,jdbcType=VARCHAR},
+			#{activecode,jdbcType=VARCHAR},
+			#{status,jdbcType=NUMERIC},
+			#{regiesttype,jdbcType=NUMERIC},
+			#{encodepasswortype,jdbcType=NUMERIC},
+			#{isthreelead,jdbcType=NUMERIC},
+			#{singuser,jdbcType=VARCHAR},
+			#{encodechar,jdbcType=VARCHAR},
+			#{encodepaychar,jdbcType=VARCHAR},
+			#{registflag,jdbcType=NUMERIC},
+			#{mapperuid,jdbcType=NUMERIC}
+		)
+	</insert>
+	<!-- 批量保存 -->
+	<insert id="saveBatch" parameterType="ArrayList">
+		insert into d_user(
+			password,
+			realname,
+			mobile,
+			idcard,
+			email,
+			role,
+			type,
+			paypassword,
+			cdate,
+			photo,
+			listphoto,
+			sessionid,
+			activecode,
+			status,
+			regiestType,
+			encodePassworType,
+			isThreeLead,
+			singUser,
+			encodeChar,
+			encodePayChar,
+			registflag,
+			mapperuid
+		)values
+		<foreach collection="list" item="obj" separator=",">
+		(
+			#{obj.password,jdbcType=VARCHAR},
+			#{obj.realname,jdbcType=VARCHAR},
+			#{obj.mobile,jdbcType=VARCHAR},
+			#{obj.idcard,jdbcType=VARCHAR},
+			#{obj.email,jdbcType=VARCHAR},
+			#{obj.role,jdbcType=NUMERIC},
+			#{obj.type,jdbcType=DECIMAL},
+			#{obj.paypassword,jdbcType=VARCHAR},
+			#{obj.cdate,jdbcType=DECIMAL},
+			#{obj.photo,jdbcType=VARCHAR},
+			#{obj.listphoto,jdbcType=VARCHAR},
+			#{obj.sessionid,jdbcType=VARCHAR},
+			#{obj.activecode,jdbcType=VARCHAR},
+			#{obj.status,jdbcType=NUMERIC},
+			#{obj.regiesttype,jdbcType=NUMERIC},
+			#{obj.encodepasswortype,jdbcType=NUMERIC},
+			#{obj.isthreelead,jdbcType=NUMERIC},
+			#{obj.singuser,jdbcType=VARCHAR},
+			#{obj.encodechar,jdbcType=VARCHAR},
+			#{obj.encodepaychar,jdbcType=VARCHAR},
+			#{obj.registflag,jdbcType=NUMERIC},
+			#{obj.mapperuid,jdbcType=NUMERIC}
+		)
+		</foreach>
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.bt.entity.User">
+		update d_user u
+		<set>
+			u.id = u.id 
+			<if test="password != null">
+				,u.password=#{password,jdbcType=VARCHAR} 
+			</if>
+			<if test="realname != null">
+				,u.realname=#{realname,jdbcType=VARCHAR} 
+			</if>
+			<if test="mobile != null">
+				,u.mobile=#{mobile,jdbcType=VARCHAR} 
+			</if>
+			<if test="idcard != null">
+				,u.idcard=#{idcard,jdbcType=VARCHAR} 
+			</if>
+			<if test="email != null">
+				,u.email=#{email,jdbcType=VARCHAR} 
+			</if>
+			<if test="role != null">
+				,u.role=#{role,jdbcType=NUMERIC} 
+			</if>
+			<if test="type != null">
+				,u.type=#{type,jdbcType=DECIMAL} 
+			</if>
+			<if test="paypassword != null">
+				,u.paypassword=#{paypassword,jdbcType=VARCHAR} 
+			</if>
+			<if test="cdate != null">
+				,u.cdate=#{cdate,jdbcType=DECIMAL} 
+			</if>
+			<if test="photo != null">
+				,u.photo=#{photo,jdbcType=VARCHAR} 
+			</if>
+			<if test="listphoto != null">
+				,u.listphoto=#{listphoto,jdbcType=VARCHAR} 
+			</if>
+			<if test="sessionid != null">
+				,u.sessionid=#{sessionid,jdbcType=VARCHAR} 
+			</if>
+			<if test="activecode != null">
+				,u.activecode=#{activecode,jdbcType=VARCHAR} 
+			</if>
+			<if test="status != null">
+				,u.status=#{status,jdbcType=NUMERIC} 
+			</if>
+			<if test="regiesttype != null">
+				,u.regiestType=#{regiesttype,jdbcType=NUMERIC} 
+			</if>
+			<if test="encodepasswortype != null">
+				,u.encodePassworType=#{encodepasswortype,jdbcType=NUMERIC} 
+			</if>
+			<if test="isthreelead != null">
+				,u.isThreeLead=#{isthreelead,jdbcType=NUMERIC} 
+			</if>
+			<if test="singuser != null">
+				,u.singUser=#{singuser,jdbcType=VARCHAR} 
+			</if>
+			<if test="encodechar != null">
+				,u.encodeChar=#{encodechar,jdbcType=VARCHAR} 
+			</if>
+			<if test="encodepaychar != null">
+				,u.encodePayChar=#{encodepaychar,jdbcType=VARCHAR} 
+			</if>
+			<if test="registflag != null">
+				,u.registflag=#{registflag,jdbcType=NUMERIC} 
+			</if>
+			<if test="mapperuid != null">
+				,u.mapperuid=#{mapperuid,jdbcType=NUMERIC} 
+			</if>
+		</set>
+		where
+            u.ID = #{id,jdbcType=NUMERIC}
+            
+	</update>
+
+	<!-- 物理删除 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from d_user where id=#{id,jdbcType=INTEGER}
+	</delete>
+	
+	
+</mapper>

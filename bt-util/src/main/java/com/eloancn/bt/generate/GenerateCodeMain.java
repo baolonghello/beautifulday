@@ -34,15 +34,15 @@ public class GenerateCodeMain {
         /**
          * java文件存放相对目录
          */
-        String coommonJavaPath = "/Users/admin/idea-workspace/spring-bt-t/bt-service/src/main/java/com/eloancn/bt/";
+        String coommonJavaPath = "/Users/admin/github-workspace/spring-bt-t/bt-service/src/main/java/com/eloancn/bt/";
         /**
          * sqlmap文件存放相对目录
          */
-        String coommonSqlPath = "/Users/admin/idea-workspace/spring-bt-t/bt-service/src/main/resources/mappers/";
+        String coommonSqlPath = "/Users/admin/github-workspace/spring-bt-t/bt-service/src/main/resources/mappers/";
         /**
          * 表名
          */
-        String[] tables = {"d_user","d_tender_bus_detail"};
+        String[] tables = {"d_tender","s_user"};
         /**
          * 表名前缀
          */

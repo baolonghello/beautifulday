@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eloancn.bt.dao.TenderMapper">
+	<sql id="baseColumnList">
+			u.id as id ,
+			u.serialnumber as serialnumber ,
+			u.title as title ,
+			u.amount as amount ,
+			u.interestrate as interestrate ,
+			u.realinterestrate as realinterestrate ,
+			u.timelimit as timelimit ,
+			u.phases as phases ,
+			u.repaymenttype as repaymenttype ,
+			u.usetype as usetype ,
+			u.mode as mode ,
+			u.type as type ,
+			u.detaildescription as detaildescription ,
+			u.status as status ,
+			u.ownerid as ownerid ,
+			u.cdate as cdate ,
+			u.publisheddate as publisheddate ,
+			u.enddate as enddate ,
+			u.bidding as bidding ,
+			u.progress as progress ,
+			u.hits as hits ,
+			u.endway as endway ,
+			u.accepttime as accepttime ,
+			u.reason as reason ,
+			u.areaId as areaid ,
+			u.showsequence as showsequence ,
+			u.reUserData as reuserdata ,
+			u.reUserDataTime as reuserdatatime ,
+			u.backTime as backtime ,
+			u.version as version ,
+			u.jiekuanAcount as jiekuanacount ,
+			u.wmpstype as wmpstype ,
+			u.isTune as istune ,
+			u.originalId as originalid ,
+			u.confirmTime as confirmtime ,
+			u.province_code as provinceCode ,
+			u.city_code as cityCode ,
+			u.county_code as countyCode ,
+			u.isnew as isnew 
+	</sql>
+	<sql id="searchCriteria">
+		<if test="id != null">
+			and u.id = #{id,jdbcType=NUMERIC}
+		</if>
+		<if test="serialnumber != null">
+			and u.serialnumber = #{serialnumber,jdbcType=DECIMAL}
+		</if>
+		<if test="title != null">
+			and u.title = #{title,jdbcType=VARCHAR}
+		</if>
+		<if test="titleLike != null">
+			and u.title like CONCAT('%',#{titleLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="amount != null">
+			and u.amount = #{amount,jdbcType=DECIMAL}
+		</if>
+		<if test="interestrate != null">
+			and u.interestrate = #{interestrate,jdbcType=DECIMAL}
+		</if>
+		<if test="realinterestrate != null">
+			and u.realinterestrate = #{realinterestrate,jdbcType=DECIMAL}
+		</if>
+		<if test="timelimit != null">
+			and u.timelimit = #{timelimit,jdbcType=DECIMAL}
+		</if>
+		<if test="phases != null">
+			and u.phases = #{phases,jdbcType=DECIMAL}
+		</if>
+		<if test="repaymenttype != null">
+			and u.repaymenttype = #{repaymenttype,jdbcType=DECIMAL}
+		</if>
+		<if test="usetype != null">
+			and u.usetype = #{usetype,jdbcType=DECIMAL}
+		</if>
+		<if test="mode != null">
+			and u.mode = #{mode,jdbcType=DECIMAL}
+		</if>
+		<if test="type != null">
+			and u.type = #{type,jdbcType=DECIMAL}
+		</if>
+		<if test="detaildescription != null">
+			and u.detaildescription = #{detaildescription,jdbcType=VARCHAR}
+		</if>
+		<if test="detaildescriptionLike != null">
+			and u.detaildescription like CONCAT('%',#{detaildescriptionLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="status != null">
+			and u.status = #{status,jdbcType=DECIMAL}
+		</if>
+		<if test="ownerid != null">
+			and u.ownerid = #{ownerid,jdbcType=NUMERIC}
+		</if>
+		<if test="cdate != null">
+			and u.cdate = #{cdate,jdbcType=DECIMAL}
+		</if>
+		<if test="publisheddate != null">
+			and u.publisheddate = #{publisheddate,jdbcType=DECIMAL}
+		</if>
+		<if test="enddate != null">
+			and u.enddate = #{enddate,jdbcType=DECIMAL}
+		</if>
+		<if test="bidding != null">
+			and u.bidding = #{bidding,jdbcType=DECIMAL}
+		</if>
+		<if test="progress != null">
+			and u.progress = #{progress,jdbcType=DECIMAL}
+		</if>
+		<if test="hits != null">
+			and u.hits = #{hits,jdbcType=NUMERIC}
+		</if>
+		<if test="endway != null">
+			and u.endway = #{endway,jdbcType=DECIMAL}
+		</if>
+		<if test="accepttime != null">
+			and u.accepttime = #{accepttime,jdbcType=DECIMAL}
+		</if>
+		<if test="reason != null">
+			and u.reason = #{reason,jdbcType=VARCHAR}
+		</if>
+		<if test="reasonLike != null">
+			and u.reason like CONCAT('%',#{reasonLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="areaid != null">
+			and u.areaId = #{areaid,jdbcType=NUMERIC}
+		</if>
+		<if test="showsequence != null">
+			and u.showsequence = #{showsequence,jdbcType=NUMERIC}
+		</if>
+		<if test="reuserdata != null">
+			and u.reUserData = #{reuserdata,jdbcType=NUMERIC}
+		</if>
+		<if test="reuserdatatime != null">
+			and u.reUserDataTime = #{reuserdatatime,jdbcType=DECIMAL}
+		</if>
+		<if test="backtime != null">
+			and u.backTime = #{backtime,jdbcType=DECIMAL}
+		</if>
+		<if test="version != null">
+			and u.version = #{version,jdbcType=NUMERIC}
+		</if>
+		<if test="jiekuanacount != null">
+			and u.jiekuanAcount = #{jiekuanacount,jdbcType=NUMERIC}
+		</if>
+		<if test="wmpstype != null">
+			and u.wmpstype = #{wmpstype,jdbcType=NUMERIC}
+		</if>
+		<if test="istune != null">
+			and u.isTune = #{istune,jdbcType=NUMERIC}
+		</if>
+		<if test="originalid != null">
+			and u.originalId = #{originalid,jdbcType=NUMERIC}
+		</if>
+		<if test="confirmtime != null">
+			and u.confirmTime = #{confirmtime,jdbcType=NUMERIC}
+		</if>
+		<if test="provinceCode != null">
+			and u.province_code = #{provinceCode,jdbcType=VARCHAR}
+		</if>
+		<if test="provinceCodeLike != null">
+			and u.province_code like CONCAT('%',#{provinceCodeLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="cityCode != null">
+			and u.city_code = #{cityCode,jdbcType=VARCHAR}
+		</if>
+		<if test="cityCodeLike != null">
+			and u.city_code like CONCAT('%',#{cityCodeLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="countyCode != null">
+			and u.county_code = #{countyCode,jdbcType=VARCHAR}
+		</if>
+		<if test="countyCodeLike != null">
+			and u.county_code like CONCAT('%',#{countyCodeLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="isnew != null">
+			and u.isnew = #{isnew,jdbcType=NUMERIC}
+		</if>
+	</sql>
+
+	<!-- 查询列表数据 -->
+	<select id="queryListResult" parameterType="java.util.Map" resultType="com.eloancn.bt.entity.Tender">
+		select
+			<include refid="baseColumnList" />
+		from
+			d_tender u
+		where
+			1=1
+			<include refid="searchCriteria" />
+			<if test="orderBy != null">
+                 order by ${orderBy}
+            </if>
+			<if test="pageNo != null and pageSize != null">
+            	limit ${(pageNo - 1) * pageSize}, ${pageSize}
+            </if>
+	</select>
+	<!-- 查询列表数据数量 -->
+	<select id="queryListResultCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select
+			count(u.id)
+		from
+			d_tender u
+		where
+			1=1
+		<include refid="searchCriteria" />
+	</select>
+	<!-- 自定义where条件查询列表 -->
+	<select id="queryListResultByWhere" parameterType="java.util.Map" statementType="STATEMENT" resultType="com.eloancn.bt.entity.Tender">
+		select
+			<include refid="baseColumnList" />
+		from
+			d_tender u
+		where
+		    ${whereSqlStr}
+			<if test="orderBy != null">
+                 order by ${orderBy}
+            </if>
+            <if test="pageNo != null and pageSize != null">
+                limit ${(pageNo - 1) * pageSize}, ${pageSize}
+            </if>
+	</select>
+	<!-- 自定义where条件查询列表数量 -->
+	<select id="queryListResultCountByWhere" parameterType="java.util.Map" statementType="STATEMENT" resultType="java.lang.Integer">
+		select
+			count(u.id)
+		from
+			d_tender u
+		where
+		    ${whereSqlStr}
+
+	</select>
+	
+	<!-- 查询一条数据 -->
+	<select id="querySingleResultById" parameterType="java.lang.Integer" resultType="com.eloancn.bt.entity.Tender">
+		select
+			<include refid="baseColumnList" />
+		from
+			d_tender u
+		where
+			1=1
+			and u.ID = #{id,jdbcType=NUMERIC}
+	</select>
+
+   <!-- 保存 -->
+	<insert id="save" parameterType="com.eloancn.bt.entity.Tender" useGeneratedKeys="true" keyProperty="id">
+		insert into d_tender(
+			serialnumber,
+			title,
+			amount,
+			interestrate,
+			realinterestrate,
+			timelimit,
+			phases,
+			repaymenttype,
+			usetype,
+			mode,
+			type,
+			detaildescription,
+			status,
+			ownerid,
+			cdate,
+			publisheddate,
+			enddate,
+			bidding,
+			progress,
+			hits,
+			endway,
+			accepttime,
+			reason,
+			areaId,
+			showsequence,
+			reUserData,
+			reUserDataTime,
+			backTime,
+			version,
+			jiekuanAcount,
+			wmpstype,
+			isTune,
+			originalId,
+			confirmTime,
+			province_code,
+			city_code,
+			county_code,
+			isnew
+		)values(
+			#{serialnumber,jdbcType=DECIMAL},
+			#{title,jdbcType=VARCHAR},
+			#{amount,jdbcType=DECIMAL},
+			#{interestrate,jdbcType=DECIMAL},
+			#{realinterestrate,jdbcType=DECIMAL},
+			#{timelimit,jdbcType=DECIMAL},
+			#{phases,jdbcType=DECIMAL},
+			#{repaymenttype,jdbcType=DECIMAL},
+			#{usetype,jdbcType=DECIMAL},
+			#{mode,jdbcType=DECIMAL},
+			#{type,jdbcType=DECIMAL},
+			#{detaildescription,jdbcType=VARCHAR},
+			#{status,jdbcType=DECIMAL},
+			#{ownerid,jdbcType=NUMERIC},
+			#{cdate,jdbcType=DECIMAL},
+			#{publisheddate,jdbcType=DECIMAL},
+			#{enddate,jdbcType=DECIMAL},
+			#{bidding,jdbcType=DECIMAL},
+			#{progress,jdbcType=DECIMAL},
+			#{hits,jdbcType=NUMERIC},
+			#{endway,jdbcType=DECIMAL},
+			#{accepttime,jdbcType=DECIMAL},
+			#{reason,jdbcType=VARCHAR},
+			#{areaid,jdbcType=NUMERIC},
+			#{showsequence,jdbcType=NUMERIC},
+			#{reuserdata,jdbcType=NUMERIC},
+			#{reuserdatatime,jdbcType=DECIMAL},
+			#{backtime,jdbcType=DECIMAL},
+			#{version,jdbcType=NUMERIC},
+			#{jiekuanacount,jdbcType=NUMERIC},
+			#{wmpstype,jdbcType=NUMERIC},
+			#{istune,jdbcType=NUMERIC},
+			#{originalid,jdbcType=NUMERIC},
+			#{confirmtime,jdbcType=NUMERIC},
+			#{provinceCode,jdbcType=VARCHAR},
+			#{cityCode,jdbcType=VARCHAR},
+			#{countyCode,jdbcType=VARCHAR},
+			#{isnew,jdbcType=NUMERIC}
+		)
+	</insert>
+	<!-- 批量保存 -->
+	<insert id="saveBatch" parameterType="ArrayList">
+		insert into d_tender(
+			serialnumber,
+			title,
+			amount,
+			interestrate,
+			realinterestrate,
+			timelimit,
+			phases,
+			repaymenttype,
+			usetype,
+			mode,
+			type,
+			detaildescription,
+			status,
+			ownerid,
+			cdate,
+			publisheddate,
+			enddate,
+			bidding,
+			progress,
+			hits,
+			endway,
+			accepttime,
+			reason,
+			areaId,
+			showsequence,
+			reUserData,
+			reUserDataTime,
+			backTime,
+			version,
+			jiekuanAcount,
+			wmpstype,
+			isTune,
+			originalId,
+			confirmTime,
+			province_code,
+			city_code,
+			county_code,
+			isnew
+		)values
+		<foreach collection="list" item="obj" separator=",">
+		(
+			#{obj.serialnumber,jdbcType=DECIMAL},
+			#{obj.title,jdbcType=VARCHAR},
+			#{obj.amount,jdbcType=DECIMAL},
+			#{obj.interestrate,jdbcType=DECIMAL},
+			#{obj.realinterestrate,jdbcType=DECIMAL},
+			#{obj.timelimit,jdbcType=DECIMAL},
+			#{obj.phases,jdbcType=DECIMAL},
+			#{obj.repaymenttype,jdbcType=DECIMAL},
+			#{obj.usetype,jdbcType=DECIMAL},
+			#{obj.mode,jdbcType=DECIMAL},
+			#{obj.type,jdbcType=DECIMAL},
+			#{obj.detaildescription,jdbcType=VARCHAR},
+			#{obj.status,jdbcType=DECIMAL},
+			#{obj.ownerid,jdbcType=NUMERIC},
+			#{obj.cdate,jdbcType=DECIMAL},
+			#{obj.publisheddate,jdbcType=DECIMAL},
+			#{obj.enddate,jdbcType=DECIMAL},
+			#{obj.bidding,jdbcType=DECIMAL},
+			#{obj.progress,jdbcType=DECIMAL},
+			#{obj.hits,jdbcType=NUMERIC},
+			#{obj.endway,jdbcType=DECIMAL},
+			#{obj.accepttime,jdbcType=DECIMAL},
+			#{obj.reason,jdbcType=VARCHAR},
+			#{obj.areaid,jdbcType=NUMERIC},
+			#{obj.showsequence,jdbcType=NUMERIC},
+			#{obj.reuserdata,jdbcType=NUMERIC},
+			#{obj.reuserdatatime,jdbcType=DECIMAL},
+			#{obj.backtime,jdbcType=DECIMAL},
+			#{obj.version,jdbcType=NUMERIC},
+			#{obj.jiekuanacount,jdbcType=NUMERIC},
+			#{obj.wmpstype,jdbcType=NUMERIC},
+			#{obj.istune,jdbcType=NUMERIC},
+			#{obj.originalid,jdbcType=NUMERIC},
+			#{obj.confirmtime,jdbcType=NUMERIC},
+			#{obj.provinceCode,jdbcType=VARCHAR},
+			#{obj.cityCode,jdbcType=VARCHAR},
+			#{obj.countyCode,jdbcType=VARCHAR},
+			#{obj.isnew,jdbcType=NUMERIC}
+		)
+		</foreach>
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.eloancn.bt.entity.Tender">
+		update d_tender u
+		<set>
+			u.id = u.id 
+			<if test="serialnumber != null">
+				,u.serialnumber=#{serialnumber,jdbcType=DECIMAL} 
+			</if>
+			<if test="title != null">
+				,u.title=#{title,jdbcType=VARCHAR} 
+			</if>
+			<if test="amount != null">
+				,u.amount=#{amount,jdbcType=DECIMAL} 
+			</if>
+			<if test="interestrate != null">
+				,u.interestrate=#{interestrate,jdbcType=DECIMAL} 
+			</if>
+			<if test="realinterestrate != null">
+				,u.realinterestrate=#{realinterestrate,jdbcType=DECIMAL} 
+			</if>
+			<if test="timelimit != null">
+				,u.timelimit=#{timelimit,jdbcType=DECIMAL} 
+			</if>
+			<if test="phases != null">
+				,u.phases=#{phases,jdbcType=DECIMAL} 
+			</if>
+			<if test="repaymenttype != null">
+				,u.repaymenttype=#{repaymenttype,jdbcType=DECIMAL} 
+			</if>
+			<if test="usetype != null">
+				,u.usetype=#{usetype,jdbcType=DECIMAL} 
+			</if>
+			<if test="mode != null">
+				,u.mode=#{mode,jdbcType=DECIMAL} 
+			</if>
+			<if test="type != null">
+				,u.type=#{type,jdbcType=DECIMAL} 
+			</if>
+			<if test="detaildescription != null">
+				,u.detaildescription=#{detaildescription,jdbcType=VARCHAR} 
+			</if>
+			<if test="status != null">
+				,u.status=#{status,jdbcType=DECIMAL} 
+			</if>
+			<if test="ownerid != null">
+				,u.ownerid=#{ownerid,jdbcType=NUMERIC} 
+			</if>
+			<if test="cdate != null">
+				,u.cdate=#{cdate,jdbcType=DECIMAL} 
+			</if>
+			<if test="publisheddate != null">
+				,u.publisheddate=#{publisheddate,jdbcType=DECIMAL} 
+			</if>
+			<if test="enddate != null">
+				,u.enddate=#{enddate,jdbcType=DECIMAL} 
+			</if>
+			<if test="bidding != null">
+				,u.bidding=#{bidding,jdbcType=DECIMAL} 
+			</if>
+			<if test="progress != null">
+				,u.progress=#{progress,jdbcType=DECIMAL} 
+			</if>
+			<if test="hits != null">
+				,u.hits=#{hits,jdbcType=NUMERIC} 
+			</if>
+			<if test="endway != null">
+				,u.endway=#{endway,jdbcType=DECIMAL} 
+			</if>
+			<if test="accepttime != null">
+				,u.accepttime=#{accepttime,jdbcType=DECIMAL} 
+			</if>
+			<if test="reason != null">
+				,u.reason=#{reason,jdbcType=VARCHAR} 
+			</if>
+			<if test="areaid != null">
+				,u.areaId=#{areaid,jdbcType=NUMERIC} 
+			</if>
+			<if test="showsequence != null">
+				,u.showsequence=#{showsequence,jdbcType=NUMERIC} 
+			</if>
+			<if test="reuserdata != null">
+				,u.reUserData=#{reuserdata,jdbcType=NUMERIC} 
+			</if>
+			<if test="reuserdatatime != null">
+				,u.reUserDataTime=#{reuserdatatime,jdbcType=DECIMAL} 
+			</if>
+			<if test="backtime != null">
+				,u.backTime=#{backtime,jdbcType=DECIMAL} 
+			</if>
+			<if test="version != null">
+				,u.version=#{version,jdbcType=NUMERIC} 
+			</if>
+			<if test="jiekuanacount != null">
+				,u.jiekuanAcount=#{jiekuanacount,jdbcType=NUMERIC} 
+			</if>
+			<if test="wmpstype != null">
+				,u.wmpstype=#{wmpstype,jdbcType=NUMERIC} 
+			</if>
+			<if test="istune != null">
+				,u.isTune=#{istune,jdbcType=NUMERIC} 
+			</if>
+			<if test="originalid != null">
+				,u.originalId=#{originalid,jdbcType=NUMERIC} 
+			</if>
+			<if test="confirmtime != null">
+				,u.confirmTime=#{confirmtime,jdbcType=NUMERIC} 
+			</if>
+			<if test="provinceCode != null">
+				,u.province_code=#{provinceCode,jdbcType=VARCHAR} 
+			</if>
+			<if test="cityCode != null">
+				,u.city_code=#{cityCode,jdbcType=VARCHAR} 
+			</if>
+			<if test="countyCode != null">
+				,u.county_code=#{countyCode,jdbcType=VARCHAR} 
+			</if>
+			<if test="isnew != null">
+				,u.isnew=#{isnew,jdbcType=NUMERIC} 
+			</if>
+		</set>
+		where
+            u.ID = #{id,jdbcType=NUMERIC}
+            
+	</update>
+
+	<!-- 物理删除 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from d_tender where id=#{id,jdbcType=INTEGER}
+	</delete>
+	
+	
+</mapper>

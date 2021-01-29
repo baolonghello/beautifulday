@@ -1,12 +1,12 @@
 package com.eloancn.bt.controller;
 
+
+
 import com.alibaba.fastjson.JSON;
-import com.eloancn.bt.entity.TenderBusDetail;
-import com.eloancn.bt.service.TenderBusDetailService;
-import com.example.entity.SUser;
-import com.example.entity.Tender;
-import com.example.service.SUserService;
-import com.example.service.TenderService;
+import com.eloancn.bt.entity.SUser;
+import com.eloancn.bt.entity.Tender;
+import com.eloancn.bt.service.SUserService;
+import com.eloancn.bt.service.TenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +25,7 @@ public class TenderBusDetailController {
     SUserService sUserService;
 
     @Autowired
-    TenderBusDetailService tenderService;
+    TenderService tenderService;
 
 
     @RequestMapping(value = "/tender", method = RequestMethod.GET)
@@ -54,7 +54,7 @@ public class TenderBusDetailController {
 
     @RequestMapping(value = "/pets", method = RequestMethod.GET)
     public String getAll(){
-        List<SUser> userList = sUserService.queryListResultByWhere();
+        List<SUser> userList = sUserService.querySUserListByWhere(1,1,1);
         return "22"+userList.size();
     }
 

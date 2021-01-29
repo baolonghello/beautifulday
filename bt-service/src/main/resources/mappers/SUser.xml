@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eloancn.bt.dao.SUserMapper">
+	<sql id="baseColumnList">
+			u.userId as userid ,
+			u.userAccount as useraccount ,
+			u.userPassword as userpassword ,
+			u.userStatus as userstatus ,
+			u.userType as usertype ,
+			u.mobile as mobile ,
+			u.email as email ,
+			u.gendar as gendar ,
+			u.nickname as nickname ,
+			u.realName as realname ,
+			u.telephone as telephone ,
+			u.cdate as cdate ,
+			u.provinceid as provinceid ,
+			u.cityid as cityid ,
+			u.cityname as cityname ,
+			u.countyid as countyid ,
+			u.countyname as countyname ,
+			u.useruid as useruid ,
+			u.tydid as tydid ,
+			u.appPasswd as apppasswd ,
+			u.province_code as provinceCode ,
+			u.city_code as cityCode ,
+			u.county_code as countyCode 
+	</sql>
+	<sql id="searchCriteria">
+		<if test="userid != null">
+			and u.userId = #{userid,jdbcType=NUMERIC}
+		</if>
+		<if test="useraccount != null">
+			and u.userAccount = #{useraccount,jdbcType=VARCHAR}
+		</if>
+		<if test="useraccountLike != null">
+			and u.userAccount like CONCAT('%',#{useraccountLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="userpassword != null">
+			and u.userPassword = #{userpassword,jdbcType=VARCHAR}
+		</if>
+		<if test="userpasswordLike != null">
+			and u.userPassword like CONCAT('%',#{userpasswordLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="userstatus != null">
+			and u.userStatus = #{userstatus,jdbcType=NUMERIC}
+		</if>
+		<if test="usertype != null">
+			and u.userType = #{usertype,jdbcType=NUMERIC}
+		</if>
+		<if test="mobile != null">
+			and u.mobile = #{mobile,jdbcType=VARCHAR}
+		</if>
+		<if test="mobileLike != null">
+			and u.mobile like CONCAT('%',#{mobileLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="email != null">
+			and u.email = #{email,jdbcType=VARCHAR}
+		</if>
+		<if test="emailLike != null">
+			and u.email like CONCAT('%',#{emailLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="gendar != null">
+			and u.gendar = #{gendar,jdbcType=NUMERIC}
+		</if>
+		<if test="nickname != null">
+			and u.nickname = #{nickname,jdbcType=VARCHAR}
+		</if>
+		<if test="nicknameLike != null">
+			and u.nickname like CONCAT('%',#{nicknameLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="realname != null">
+			and u.realName = #{realname,jdbcType=VARCHAR}
+		</if>
+		<if test="realnameLike != null">
+			and u.realName like CONCAT('%',#{realnameLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="telephone != null">
+			and u.telephone = #{telephone,jdbcType=VARCHAR}
+		</if>
+		<if test="telephoneLike != null">
+			and u.telephone like CONCAT('%',#{telephoneLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="cdate != null">
+			and u.cdate = #{cdate,jdbcType=NUMERIC}
+		</if>
+		<if test="provinceid != null">
+			and u.provinceid = #{provinceid,jdbcType=NUMERIC}
+		</if>
+		<if test="cityid != null">
+			and u.cityid = #{cityid,jdbcType=NUMERIC}
+		</if>
+		<if test="cityname != null">
+			and u.cityname = #{cityname,jdbcType=VARCHAR}
+		</if>
+		<if test="citynameLike != null">
+			and u.cityname like CONCAT('%',#{citynameLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="countyid != null">
+			and u.countyid = #{countyid,jdbcType=NUMERIC}
+		</if>
+		<if test="countyname != null">
+			and u.countyname = #{countyname,jdbcType=VARCHAR}
+		</if>
+		<if test="countynameLike != null">
+			and u.countyname like CONCAT('%',#{countynameLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="useruid != null">
+			and u.useruid = #{useruid,jdbcType=VARCHAR}
+		</if>
+		<if test="useruidLike != null">
+			and u.useruid like CONCAT('%',#{useruidLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="tydid != null">
+			and u.tydid = #{tydid,jdbcType=NUMERIC}
+		</if>
+		<if test="apppasswd != null">
+			and u.appPasswd = #{apppasswd,jdbcType=VARCHAR}
+		</if>
+		<if test="apppasswdLike != null">
+			and u.appPasswd like CONCAT('%',#{apppasswdLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="provinceCode != null">
+			and u.province_code = #{provinceCode,jdbcType=VARCHAR}
+		</if>
+		<if test="provinceCodeLike != null">
+			and u.province_code like CONCAT('%',#{provinceCodeLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="cityCode != null">
+			and u.city_code = #{cityCode,jdbcType=VARCHAR}
+		</if>
+		<if test="cityCodeLike != null">
+			and u.city_code like CONCAT('%',#{cityCodeLike,jdbcType=VARCHAR},'%') 
+		</if>
+		<if test="countyCode != null">
+			and u.county_code = #{countyCode,jdbcType=VARCHAR}
+		</if>
+		<if test="countyCodeLike != null">
+			and u.county_code like CONCAT('%',#{countyCodeLike,jdbcType=VARCHAR},'%') 
+		</if>
+	</sql>
+
+	<!-- 查询列表数据 -->
+	<select id="queryListResult" parameterType="java.util.Map" resultType="com.eloancn.bt.entity.SUser">
+		select
+			<include refid="baseColumnList" />
+		from
+			s_user u
+		where
+			1=1
+			<include refid="searchCriteria" />
+			<if test="orderBy != null">
+                 order by ${orderBy}
+            </if>
+			<if test="pageNo != null and pageSize != null">
+            	limit ${(pageNo - 1) * pageSize}, ${pageSize}
+            </if>
+	</select>
+	<!-- 查询列表数据数量 -->
+	<select id="queryListResultCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select
+			count(u.id)
+		from
+			s_user u
+		where
+			1=1
+		<include refid="searchCriteria" />
+	</select>
+	<!-- 自定义where条件查询列表 -->
+	<select id="queryListResultByWhere" parameterType="java.util.Map" statementType="STATEMENT" resultType="com.eloancn.bt.entity.SUser">
+		select
+			<include refid="baseColumnList" />
+		from
+			s_user u
+		where
+		    ${whereSqlStr}
+			<if test="orderBy != null">
+                 order by ${orderBy}
+            </if>
+            <if test="pageNo != null and pageSize != null">
+                limit ${(pageNo - 1) * pageSize}, ${pageSize}
+            </if>
+	</select>
+	<!-- 自定义where条件查询列表数量 -->
+	<select id="queryListResultCountByWhere" parameterType="java.util.Map" statementType="STATEMENT" resultType="java.lang.Integer">
+		select
+			count(u.id)
+		from
+			s_user u
+		where
+		    ${whereSqlStr}
+
+	</select>
+	
+	<!-- 查询一条数据 -->
+	<select id="querySingleResultById" parameterType="java.lang.Integer" resultType="com.eloancn.bt.entity.SUser">
+		select
+			<include refid="baseColumnList" />
+		from
+			s_user u
+		where
+			1=1
+			and u.ID = #{id,jdbcType=NUMERIC}
+	</select>
+
+   <!-- 保存 -->
+	<insert id="save" parameterType="com.eloancn.bt.entity.SUser" useGeneratedKeys="true" keyProperty="id">
+		insert into s_user(
+			userId,
+			userAccount,
+			userPassword,
+			userStatus,
+			userType,
+			mobile,
+			email,
+			gendar,
+			nickname,
+			realName,
+			telephone,
+			cdate,
+			provinceid,
+			cityid,
+			cityname,
+			countyid,
+			countyname,
+			useruid,
+			tydid,
+			appPasswd,
+			province_code,
+			city_code,
+			county_code
+		)values(
+			#{userid,jdbcType=NUMERIC},
+			#{useraccount,jdbcType=VARCHAR},
+			#{userpassword,jdbcType=VARCHAR},
+			#{userstatus,jdbcType=NUMERIC},
+			#{usertype,jdbcType=NUMERIC},
+			#{mobile,jdbcType=VARCHAR},
+			#{email,jdbcType=VARCHAR},
+			#{gendar,jdbcType=NUMERIC},
+			#{nickname,jdbcType=VARCHAR},
+			#{realname,jdbcType=VARCHAR},
+			#{telephone,jdbcType=VARCHAR},
+			#{cdate,jdbcType=NUMERIC},
+			#{provinceid,jdbcType=NUMERIC},
+			#{cityid,jdbcType=NUMERIC},
+			#{cityname,jdbcType=VARCHAR},
+			#{countyid,jdbcType=NUMERIC},
+			#{countyname,jdbcType=VARCHAR},
+			#{useruid,jdbcType=VARCHAR},
+			#{tydid,jdbcType=NUMERIC},
+			#{apppasswd,jdbcType=VARCHAR},
+			#{provinceCode,jdbcType=VARCHAR},
+			#{cityCode,jdbcType=VARCHAR},
+			#{countyCode,jdbcType=VARCHAR}
+		)
+	</insert>
+	<!-- 批量保存 -->
+	<insert id="saveBatch" parameterType="ArrayList">
+		insert into s_user(
+			userId,
+			userAccount,
+			userPassword,
+			userStatus,
+			userType,
+			mobile,
+			email,
+			gendar,
+			nickname,
+			realName,
+			telephone,
+			cdate,
+			provinceid,
+			cityid,
+			cityname,
+			countyid,
+			countyname,
+			useruid,
+			tydid,
+			appPasswd,
+			province_code,
+			city_code,
+			county_code
+		)values
+		<foreach collection="list" item="obj" separator=",">
+		(
+			#{obj.userid,jdbcType=NUMERIC},
+			#{obj.useraccount,jdbcType=VARCHAR},
+			#{obj.userpassword,jdbcType=VARCHAR},
+			#{obj.userstatus,jdbcType=NUMERIC},
+			#{obj.usertype,jdbcType=NUMERIC},
+			#{obj.mobile,jdbcType=VARCHAR},
+			#{obj.email,jdbcType=VARCHAR},
+			#{obj.gendar,jdbcType=NUMERIC},
+			#{obj.nickname,jdbcType=VARCHAR},
+			#{obj.realname,jdbcType=VARCHAR},
+			#{obj.telephone,jdbcType=VARCHAR},
+			#{obj.cdate,jdbcType=NUMERIC},
+			#{obj.provinceid,jdbcType=NUMERIC},
+			#{obj.cityid,jdbcType=NUMERIC},
+			#{obj.cityname,jdbcType=VARCHAR},
+			#{obj.countyid,jdbcType=NUMERIC},
+			#{obj.countyname,jdbcType=VARCHAR},
+			#{obj.useruid,jdbcType=VARCHAR},
+			#{obj.tydid,jdbcType=NUMERIC},
+			#{obj.apppasswd,jdbcType=VARCHAR},
+			#{obj.provinceCode,jdbcType=VARCHAR},
+			#{obj.cityCode,jdbcType=VARCHAR},
+			#{obj.countyCode,jdbcType=VARCHAR}
+		)
+		</foreach>
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.eloancn.bt.entity.SUser">
+		update s_user u
+		<set>
+			u.id = u.id 
+			<if test="userid != null">
+				,u.userId=#{userid,jdbcType=NUMERIC} 
+			</if>
+			<if test="useraccount != null">
+				,u.userAccount=#{useraccount,jdbcType=VARCHAR} 
+			</if>
+			<if test="userpassword != null">
+				,u.userPassword=#{userpassword,jdbcType=VARCHAR} 
+			</if>
+			<if test="userstatus != null">
+				,u.userStatus=#{userstatus,jdbcType=NUMERIC} 
+			</if>
+			<if test="usertype != null">
+				,u.userType=#{usertype,jdbcType=NUMERIC} 
+			</if>
+			<if test="mobile != null">
+				,u.mobile=#{mobile,jdbcType=VARCHAR} 
+			</if>
+			<if test="email != null">
+				,u.email=#{email,jdbcType=VARCHAR} 
+			</if>
+			<if test="gendar != null">
+				,u.gendar=#{gendar,jdbcType=NUMERIC} 
+			</if>
+			<if test="nickname != null">
+				,u.nickname=#{nickname,jdbcType=VARCHAR} 
+			</if>
+			<if test="realname != null">
+				,u.realName=#{realname,jdbcType=VARCHAR} 
+			</if>
+			<if test="telephone != null">
+				,u.telephone=#{telephone,jdbcType=VARCHAR} 
+			</if>
+			<if test="cdate != null">
+				,u.cdate=#{cdate,jdbcType=NUMERIC} 
+			</if>
+			<if test="provinceid != null">
+				,u.provinceid=#{provinceid,jdbcType=NUMERIC} 
+			</if>
+			<if test="cityid != null">
+				,u.cityid=#{cityid,jdbcType=NUMERIC} 
+			</if>
+			<if test="cityname != null">
+				,u.cityname=#{cityname,jdbcType=VARCHAR} 
+			</if>
+			<if test="countyid != null">
+				,u.countyid=#{countyid,jdbcType=NUMERIC} 
+			</if>
+			<if test="countyname != null">
+				,u.countyname=#{countyname,jdbcType=VARCHAR} 
+			</if>
+			<if test="useruid != null">
+				,u.useruid=#{useruid,jdbcType=VARCHAR} 
+			</if>
+			<if test="tydid != null">
+				,u.tydid=#{tydid,jdbcType=NUMERIC} 
+			</if>
+			<if test="apppasswd != null">
+				,u.appPasswd=#{apppasswd,jdbcType=VARCHAR} 
+			</if>
+			<if test="provinceCode != null">
+				,u.province_code=#{provinceCode,jdbcType=VARCHAR} 
+			</if>
+			<if test="cityCode != null">
+				,u.city_code=#{cityCode,jdbcType=VARCHAR} 
+			</if>
+			<if test="countyCode != null">
+				,u.county_code=#{countyCode,jdbcType=VARCHAR} 
+			</if>
+		</set>
+		where
+            u.ID = #{id,jdbcType=NUMERIC}
+            
+	</update>
+
+	<!-- 物理删除 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from s_user where id=#{id,jdbcType=INTEGER}
+	</delete>
+	
+	
+</mapper>

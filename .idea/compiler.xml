@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="bt-util" />
-        <module name="bt-service" />
         <module name="bt-api" />
+        <module name="bt-service" />
       </profile>
     </annotationProcessing>
   </component>

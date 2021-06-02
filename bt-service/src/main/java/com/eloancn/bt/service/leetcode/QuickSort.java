@@ -1,5 +1,7 @@
 package com.eloancn.bt.service.leetcode;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * @ Description   :  QuickSort
  * @ Author        :  baolong.sun
@@ -33,8 +35,8 @@ public class QuickSort {
             return;
         }
 
-        int start = 0;
-        int end = arr.length-1;
+        int start = startIndex;
+        int end = endIndex;
         //target是本次循环要排序的元素，每次循环都是确定一个元素的排序位置，这个元素都是开始下标对应的元素
         int target = arr[startIndex];
         //开始循环，从两头往中间循环，相遇后循环结束
@@ -48,7 +50,6 @@ public class QuickSort {
                     end--;
                 }
             }
-
             //从左向右循环比较，如果比target大，就和target交换位置，让所有比target大的元素到target的右边去
             while (start < end) {
                 if (arr[start] > target) {

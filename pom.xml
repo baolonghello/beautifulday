@@ -17,6 +17,7 @@
         <module>bt-api</module>
         <module>bt-util</module>
         <module>bt-service</module>
+        <module>webflux</module>
     </modules>
     <dependencies>
         <dependency>
